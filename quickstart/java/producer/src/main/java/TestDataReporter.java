@@ -24,7 +24,8 @@ public class TestDataReporter implements Runnable {
             long time = System.currentTimeMillis();
             System.out.println("Test Data #" + i + " from thread #" + Thread.currentThread().getId());
             
-            final ProducerRecord<Long, String> record = new ProducerRecord<Long, String>(TOPIC, time, "Test Data #" + i);
+            //final ProducerRecord<Long, String> record = new ProducerRecord<Long, String>(TOPIC, time, "Test Data #" + i);
+            final ProducerRecord<Long, String> record = new ProducerRecord<Long, String>(TOPIC, time, "{ \"eventData\": \"Test Data " + i + "\" }");
             producer.send(record, new Callback() {
                 public void onCompletion(RecordMetadata metadata, Exception exception) {
                     if (exception != null) {
